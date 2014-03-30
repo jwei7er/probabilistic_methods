@@ -190,7 +190,7 @@ def readPreamble():
         return mnCards, mnCliques
 
     else:
-        raise Exception("Error: " + args[i] + " argument not recognized")
+        raise Exception("Error: Markov network input file needed")
 
 def solvePR(mnCards, mnFactors):
     """
