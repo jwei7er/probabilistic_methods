@@ -34,9 +34,7 @@ def factorProduct(f1, f2):
             uniqueVars.insert(0, f1.variables[i])
 
     # Create the new product factor
-    factor = Factor(uniqueVars)
-    factor.setCards(mnCards)
-    factor.calculateStrides()
+    factor = Factor(uniqueVars, mnCards)
 
     j, k = 0, 0
     psi = []
@@ -96,11 +94,9 @@ def readFunctionTables():
     mnFactors = []
     factorIndex, factorNum = 0, 0
 
-    fClass = Factor(mnCliques[factorIndex])
-    fClass.setCards(mnCards)
-    fClass.calculateStrides()
-    factor = []
+    fClass = Factor(mnCliques[factorIndex], mnCards)
     
+    factor = []
     done = False
     while not done:
         inputRow = inFile.readline().strip()
@@ -124,9 +120,7 @@ def readFunctionTables():
                     factor = []
                     factorIndex += 1
                     if factorIndex < len(mnCliques):
-                        fClass = Factor(mnCliques[factorIndex])
-                        fClass.setCards(mnCards)
-                        fClass.calculateStrides()
+                        fClass = Factor(mnCliques[factorIndex], mnCards)
             else:
                 factorNum = int(inputRow)
                 
@@ -202,16 +196,13 @@ def sumOutVariable(factor, variable):
 
     if debug: print "new vars: ", newVars
 
-    newF = Factor(newVars)
+    newF = Factor(newVars, mnCards)
 
     if len(newVars) > 0:
         varIndex = factor.variables.index(variable)
-        if debug: print "var index: ", varIndex
-
-        newF.setCards(mnCards)
-        newF.calculateStrides()
-
-        if debug: newF.printF()
+        if debug: 
+            print "var index: ", varIndex
+            newF.printF()
 
         usedVar = [False for x in range(factor.size)]
 

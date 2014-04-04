@@ -6,12 +6,14 @@ Date:   May 17, 2013
 """
 
 class Factor:
-    def __init__(self, variables):
+    def __init__(self, variables, cardValues):
         self.variables = variables
         self.card = []
         self.stride = []
         self.phi = []
         self.size = 1
+        self.setCards(cardValues)
+        self.calculateStrides()
 
     def calculateStrides(self):
         """
